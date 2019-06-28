@@ -1,0 +1,39 @@
+<div class="container mb-5">
+  <div class="row justify-content-md-center">
+    <div class="col-md-10">
+      <h2>{{ titulo }}</h2>
+      <hr class="bg-info mb-5">
+
+    <div *ngFor="let comment of comments, let i = index; trackBy: trackByCommentId" >
+      <ng-container *ngIf = "comment.name>''&& comment.comentario>''; else nocomment" >
+      <h4 class="d-inline">{{ comment.name }}</h4>
+      <span class="d-inline"> {{ comment.date }}</span>
+      <p class="mb-5">{{ comment.comentario }}</p>
+      </ng-container>
+    </div>
+    <ng-template #nocomment>
+     <p class="text-danger"> Tienes que escribir algo </p>
+     <p [ngStyle] ="{color:red}">Tienes que escribir algo</p>
+    </ng-template>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-7">
+          <form class="bg-light p-5" #formulario>
+            <h3>Add your comment</h3>
+            <hr class="bg-info">
+            <div class="form-group">
+              <label for="">Name</label>
+              <input type="text" class="form-control" name = nombre #name [(ngModel)]="username">
+              <p>{{username}}</p>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Description:</label>
+              <textarea class="form-control" #exampleFormControlTextarea1 rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-info" (click)='saveComment($event, formulario)'>Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
